@@ -441,15 +441,13 @@ const PROJECTS = [
     title: "Marketplace",
     tech: "LARAVEL + MYSQL",
     githubUrl: "https://github.com/Chizuyu/Marketplace",
-    githubUrlProfile: "https://github.com/Chizuyu",
     desc: "A full-stack e-commerce solution with admin dashboard, CRUD product management, and real-time sales reporting."
   },
   {
     title: "Blogger",
-    tech: "KOTLIN + ROOM DB",
+    tech: "KOTLIN + API",
     githubUrl: "https://github.com/Chizuyu/Blogger",
-    githubUrlProfile: "https://github.com/Chizuyu",
-    desc: "Offline-first Android application designed for clinical tracking, utilizing Room/SQLite for data synchronization."
+    desc: "Offline-first Android application designed for Blogger, utilizing API for data synchronization."
   }
 ];
 
@@ -845,7 +843,7 @@ export default function App() {
                       <ExternalLink className="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
                     </a>
                     <a
-                      href={project.githubUrlProfile}
+                      href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-2 hover:bg-white/5 rounded-full text-on-surface-variant hover:text-secondary transition-all"
