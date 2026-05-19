@@ -731,7 +731,7 @@ export default function App() {
             {/* 2. CONTAINER FOTO DENGAN BORDER & OVERLAY */}
             <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 p-2 bg-white/5 backdrop-blur-sm">
               <img
-                src="public/Photo.jpg" // Pastikan path benar (biasanya dari folder public cukup "/photo.jpg")
+                src="Photo.jpg" // Pastikan path benar (biasanya dari folder public cukup "/photo.jpg")
                 alt="Muhammad Yazid Hazami"
                 className="w-full aspect-square object-cover rounded-[2rem] grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-1000 ease-out"
               />
