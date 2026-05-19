@@ -40,7 +40,7 @@
   .nav-link {
     @apply font-mono text-sm text-on-surface-variant/70 hover:text-secondary transition-all relative py-1 bg-transparent border-none;
   }
-  
+/*   
   .nav-link::after {
     content: '';
     @apply absolute bottom-0 left-0 w-0 h-px bg-secondary transition-all duration-300;
@@ -48,7 +48,7 @@
   
   .nav-link:hover::after {
     @apply w-full;
-  }
+  } */
 
   .btn-primary {
     @apply bg-secondary text-on-secondary-fixed font-mono px-6 py-2 rounded-lg hover:brightness-110 transition-all active:scale-95 cursor-pointer;

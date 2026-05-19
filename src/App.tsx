@@ -391,16 +391,20 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { motion } from "motion/react";
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   SiSharp, SiOpenjdk, SiKotlin, SiPhp, SiJavascript, SiHtml5,
   SiMysql, SiSqlite, SiAndroidstudio,
-  SiGit, SiPostman, SiFigma, SiDocker, SiTailwindcss
+  SiGit, SiPostman, SiFigma, SiLaragon,
+  SiBootstrap, SiLaravel, SiNextdotjs, SiNetapp
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 import {
   Terminal, ArrowRight, Database, Code2, Smartphone,
-  ExternalLink, User, Github, Mail, Cpu, GitBranch
+  ExternalLink, User, Github, Mail, Cpu, GitBranch,
+  Instagram,
+  Linkedin
 } from "lucide-react";
 
 // --- DATA CONFIGURATION DENGAN ICON ---
@@ -411,19 +415,24 @@ const SKILLS = {
     { name: 'Kotlin', icon: SiKotlin },
     { name: 'PHP', icon: SiPhp },
     { name: 'JS', icon: SiJavascript },
-    { name: 'Tailwind', icon: SiTailwindcss }, // Ganti HTML/CSS ke Tailwind agar keren
+    { name: 'Bootstrap', icon: SiBootstrap }, // Ganti HTML/CSS ke Tailwind agar keren
   ],
   databases: [
-    { name: 'MySQL', val: '95%', color: 'bg-secondary', icon: SiMysql },
-    { name: 'SQLite', val: '88%', color: 'bg-tertiary', icon: SiSqlite }
+    { name: 'MySQL', icon: SiMysql },
+    { name: 'SQL', icon: SiSqlite }
+
   ],
   tools: [
     { name: 'VS Code', icon: VscVscode },
+    { name: 'VS Community', icon: VscVscode },
     { name: 'Android Studio', icon: SiAndroidstudio },
     { name: 'Git', icon: SiGit },
     { name: 'Postman', icon: SiPostman },
+    { name: 'Laragon', icon: SiLaragon },
     { name: 'Figma', icon: SiFigma },
-    { name: 'Docker', icon: SiDocker },
+    { name: 'Laravel', icon: SiLaravel },
+    { name: 'Next.js', icon: SiNextdotjs },
+    { name: '.NET', icon: SiNetapp }
   ]
 };
 
@@ -432,12 +441,14 @@ const PROJECTS = [
     title: "Marketplace",
     tech: "LARAVEL + MYSQL",
     githubUrl: "https://github.com/Chizuyu/Marketplace",
+    githubUrlProfile: "https://github.com/Chizuyu",
     desc: "A full-stack e-commerce solution with admin dashboard, CRUD product management, and real-time sales reporting."
   },
   {
-    title: "Native Health Matrix",
+    title: "Blogger",
     tech: "KOTLIN + ROOM DB",
-    img: "https://images.unsplash.com/photo-1576091160550-2173bdb999ef?q=80&w=2070&auto=format&fit=crop",
+    githubUrl: "https://github.com/Chizuyu/Blogger",
+    githubUrlProfile: "https://github.com/Chizuyu",
     desc: "Offline-first Android application designed for clinical tracking, utilizing Room/SQLite for data synchronization."
   }
 ];
@@ -474,6 +485,50 @@ const SectionHeader = ({ title, subtitle, tag }: { title: string; subtitle: stri
 );
 
 export default function App() {
+
+  const [activeSection, setActiveSection] = useState("home");
+  useEffect(() => {
+    const sections = ['home', 'skills', 'projects', 'contact'];
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-40% 0px -40% 0px', // Mendeteksi saat section ada di tengah layar
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Fungsi untuk Typewriter Effect 
+  const [index, setIndex] = useState(0);
+  const words = [
+    "robust android applications",
+    "software engineering",
+    "seamless mobile experiences",
+    "modern software engineering",
+    "scalable data architectures"
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % words.length);
+    }, 3000); // Berganti setiap 3 detik
+    return () => clearInterval(timer);
+  }, []);
+
   // Fungsi untuk Smooth Scroll
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
@@ -486,24 +541,33 @@ export default function App() {
       <nav className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/5">
         <div className="flex justify-between items-center h-16 px-6 max-w-7xl mx-auto">
           <div className="font-mono text-2xl font-bold tracking-tighter text-secondary cursor-pointer" onClick={() => scrollTo('home')}>
-            MUHAMMAD YAZID HAZAMI
+            YAZID'S ARCHIVE
           </div>
           <div className="hidden md:flex items-center space-x-8">
             {['home', 'skills', 'projects', 'contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollTo(item)}
-                className="nav-link capitalize"
+                className={`nav-link capitalize relative transition-colors duration-300 ${activeSection === item ? 'text-secondary font-bold' : 'text-on-surface-variant hover:text-secondary'
+                  }`}
               >
                 {item}
+                {/* Garis bawah animasi (Opsional, tapi keren) */}
+                {activeSection === item && (
+                  <motion.div
+                    layoutId="activeNav"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-secondary"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
               </button>
             ))}
           </div>
-          <div className="flex items-center space-x-4">
+          {/* <div className="flex items-center space-x-4">
             <button className="btn-primary uppercase tracking-wider text-xs font-bold shadow-lg shadow-secondary/10">
               Resume
             </button>
-          </div>
+          </div> */}
         </div>
       </nav>
 
@@ -511,50 +575,138 @@ export default function App() {
         {/* Hero Section */}
         <section id="home" className="relative grid lg:grid-cols-2 gap-16 items-center min-h-[70vh]">
           <div className="space-y-8 z-10">
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               className="inline-flex items-center space-x-2 px-3 py-1 glass-card rounded-full"
             >
               <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
               <span className="font-mono text-[10px] text-secondary uppercase tracking-widest">Available for hire</span>
-            </motion.div>
+            </motion.div> */}
 
             <motion.h1
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9]"
+              className="text-6xl md:text-6xl font-extrabold tracking-tighter leading-[0.9]"
             >
-              Full-stack <br />
-              <span className="text-secondary">Architect.</span>
+              MUHAMMAD YAZID <br />
+              <span className="text-secondary">HAZAMI</span>
             </motion.h1>
 
+            {/* Ganti bagian motion.p yang lama dengan ini */}
+            <div className="h-20 md:h-10"> {/* Container tinggi tetap agar layout tidak goyang saat teks ganti */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="text-on-surface-variant text-xl max-w-lg leading-relaxed flex flex-col"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={words[index]}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="text-white font-semibold capitalize"
+                  >
+                    {words[index]}.
+                  </motion.span>
+                </AnimatePresence>
+              </motion.p>
+            </div>
+
+            {/* Biografi Singkat */}
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-on-surface-variant text-xl max-w-lg leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="text-on-surface-variant/80 text-lg max-w-lg leading-relaxed border-l-2 border-secondary/20 pl-4"
             >
-              Building high-performance backend systems and seamless mobile experiences with modern engineering.
+              "Hello, I'm a Software Engineering student passionate about building responsive mobile apps and websites.
+              I believe great digital products are born from a mix of solid logic and modern design.
+              My goal is to create solution-oriented, aesthetic, and impactful experiences for every user."
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="flex flex-wrap gap-4 pt-4"
+              transition={{ delay: 1 }}
+              className="flex flex-wrap gap-5 pt-6"
             >
-              <button onClick={() => scrollTo('contact')} className="btn-primary py-4 px-8 flex items-center gap-2 group text-base">
-                INITIATE PROJECT <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button onClick={() => scrollTo('projects')} className="btn-outline py-4 px-8 text-base">
-                VIEW WORK
-              </button>
+              {/* TOMBOL UTAMA: VIEW WORK */}
+              <motion.button
+                onClick={() => scrollTo('projects')}
+                whileHover={{ scale: 1.05, translateY: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative px-8 py-4 bg-secondary text-surface font-bold rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_0_20px_rgba(168,85,247,0.2)] hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] flex items-center gap-3"
+              >
+                {/* Efek kilatan cahaya saat hover */}
+                <div className="absolute inset-0 w-full h-full bg-white/20 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
+
+                <span className="relative z-10">VIEW WORK</span>
+                <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+              </motion.button>
+
+              {/* TOMBOL KEDUA: SAY HELLO (Efek Glassmorphism) */}
+              <motion.button
+                onClick={() => scrollTo('contact')}
+                whileHover={{ scale: 1.05, translateY: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 bg-white/5 backdrop-blur-md border border-white/10 text-white font-medium rounded-2xl hover:bg-white/10 hover:border-secondary/50 transition-all duration-300 flex items-center gap-3"
+              >
+                INITIATE PROJECT
+              </motion.button>
+            </motion.div>
+
+            {/* --- ICON SOSIAL MEDIA (TAMBAHAN BARU) --- */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2 }} // Muncul paling akhir agar efek urutannya bagus
+              className="flex items-center gap-6"
+            >
+              {/* Link GitHub */}
+              <a
+                href="https://github.com/Chizuyu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative p-2"
+              >
+                <Github className="w-5 h-5 text-on-surface-variant group-hover:text-secondary transition-colors duration-300" />
+                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-mono text-secondary opacity-0 group-hover:opacity-100 transition-opacity">GITHUB</span>
+              </a>
+
+              {/* Link LinkedIn */}
+              <a
+                href="https://linkedin.com/in/username-anda"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative p-2"
+              >
+                <Linkedin className="w-5 h-5 text-on-surface-variant group-hover:text-secondary transition-colors duration-300" />
+                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-mono text-secondary opacity-0 group-hover:opacity-100 transition-opacity">LINKEDIN</span>
+              </a>
+
+              {/* Link Instagram */}
+              <a
+                href="https://instagram.com/hazaamii"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative p-2"
+              >
+                <Instagram className="w-5 h-5 text-on-surface-variant group-hover:text-secondary transition-colors duration-300" />
+                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-mono text-secondary opacity-0 group-hover:opacity-100 transition-opacity">INSTAGRAM</span>
+              </a>
+
+              {/* Garis Dekoratif (Opsional agar terlihat lebih estetik) */}
+              <div className="h-px w-12 bg-secondary/20 ml-2"></div>
+              <span className="text-[10px] font-mono text-on-surface-variant/40 uppercase tracking-[0.2em]">Socials</span>
             </motion.div>
           </div>
 
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2 }}
@@ -562,21 +714,46 @@ export default function App() {
           >
             <div className="absolute -inset-4 bg-secondary/20 blur-3xl rounded-full opacity-20 animate-pulse"></div>
             <img
-              src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
-              alt="Tech"
+              src="public/photo.jpg"
+              alt="Muhammad Yazid Hazami"
               className="relative w-full aspect-square object-cover rounded-[2rem] grayscale hover:grayscale-0 transition-all duration-1000 border border-white/10"
             />
+          </motion.div> */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2 }}
+            className="hidden lg:block relative group"
+          >
+            {/* 1. EFEK GLOW (Cahaya Ungu di Belakang) */}
+            <div className="absolute -inset-4 bg-secondary/30 blur-[100px] rounded-full opacity-40 group-hover:opacity-60 transition-opacity duration-1000 animate-pulse"></div>
+
+            {/* 2. CONTAINER FOTO DENGAN BORDER & OVERLAY */}
+            <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 p-2 bg-white/5 backdrop-blur-sm">
+              <img
+                src="public/photo.jpg" // Pastikan path benar (biasanya dari folder public cukup "/photo.jpg")
+                alt="Muhammad Yazid Hazami"
+                className="w-full aspect-square object-cover rounded-[2rem] grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-1000 ease-out"
+              />
+
+              {/* 3. EFEK GRADIENT OVERLAY (Agar bagian bawah foto sedikit gelap & menyatu) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-60"></div>
+            </div>
+
+            {/* 4. DEKORASI SUDUT (Opsional - Memberikan kesan "Tech/Archive") */}
+            <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-secondary/50 rounded-tr-[2rem] -mr-2 -mt-2"></div>
+            <div className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-secondary/50 rounded-bl-[2rem] -ml-2 -mb-2"></div>
           </motion.div>
         </section>
 
         {/* Skills Section yang sudah di-update */}
         <section id="skills" className="scroll-mt-24">
-          <SectionHeader title="Expertise" subtitle="My technical arsenal." tag="STACK_V4.0" />
+          <SectionHeader title="Tech Stack" subtitle="My technical arsenal." />
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
 
             {/* Bagian Languages dengan Icon */}
-            <motion.div className="md:col-span-4 glass-card p-8 rounded-[2rem] space-y-6">
+            <motion.div className="md:col-span-6 glass-card p-8 rounded-[2rem] space-y-6">
               <h3 className="font-mono text-xs text-secondary tracking-widest uppercase">Languages</h3>
               <div className="grid grid-cols-2 gap-4">
                 {SKILLS.languages.map((lang, i) => (
@@ -589,7 +766,7 @@ export default function App() {
             </motion.div>
 
             {/* Bagian Database dengan Icon */}
-            <motion.div className="md:col-span-8 glass-card p-8 rounded-[2rem] space-y-8">
+            <motion.div className="md:col-span-6 glass-card p-8 rounded-[2rem] space-y-8">
               <h3 className="text-xl font-bold">Data Architecture</h3>
               <div className="grid md:grid-cols-2 gap-8">
                 {SKILLS.databases.map((db, i) => (
@@ -599,14 +776,6 @@ export default function App() {
                       <div className="flex-1">
                         <div className="flex justify-between text-xs font-mono mb-2">
                           <span>{db.name}</span>
-                          <span>{db.val}</span>
-                        </div>
-                        <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden">
-                          <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: db.val }}
-                            className={`${db.color} h-full`}
-                          />
                         </div>
                       </div>
                     </div>
@@ -617,7 +786,7 @@ export default function App() {
 
             {/* Bagian Tools dengan Icon (Badge Style) */}
             <motion.div className="md:col-span-12 glass-card p-8 rounded-[2rem]">
-              <h3 className="font-mono text-xs text-tertiary tracking-widest uppercase mb-6">Environment & Tools</h3>
+              <h3 className="font-mono text-xs text-tertiary tracking-widest uppercase mb-6">Tools & Framework</h3>
               <div className="flex flex-wrap gap-4">
                 {SKILLS.tools.map((tool, i) => (
                   <div key={i} className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-xl border border-white/10 hover:border-secondary/50 transition-all group">
@@ -634,9 +803,8 @@ export default function App() {
         {/* Projects Section */}
         <section id="projects" className="scroll-mt-24 space-y-12">
           <SectionHeader
-            title="Selected Projects"
+            title="My Projects"
             subtitle="A collection of systems and applications I've engineered."
-            tag="PROJ_LIST_2024"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -651,20 +819,6 @@ export default function App() {
                 className="glass-card group p-8 rounded-[2rem] flex flex-col justify-between border-l-4 border-l-transparent hover:border-l-secondary transition-all duration-300"
               >
                 <div className="space-y-4">
-                  <div className="flex justify-between items-start">
-                    <div className="p-3 bg-secondary/10 rounded-xl">
-                      <Code2 className="w-6 h-6 text-secondary" />
-                    </div>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 hover:bg-white/5 rounded-full text-on-surface-variant hover:text-secondary transition-all"
-                    >
-                      <Github className="w-6 h-6" />
-                    </a>
-                  </div>
-
                   <div>
                     <h3 className="text-2xl font-bold group-hover:text-secondary transition-colors">
                       {project.title}
@@ -680,15 +834,25 @@ export default function App() {
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-white/5">
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm font-mono text-secondary group/link w-fit"
-                  >
-                    VIEW SOURCE CODE
-                    <ExternalLink className="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
-                  </a>
+                  <div className="flex justify-between items-start">
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm font-mono text-secondary group/link w-fit"
+                    >
+                      VIEW SOURCE CODE
+                      <ExternalLink className="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
+                    </a>
+                    <a
+                      href={project.githubUrlProfile}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 hover:bg-white/5 rounded-full text-on-surface-variant hover:text-secondary transition-all"
+                    >
+                      <Github className="w-6 h-6" />
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -714,18 +878,11 @@ export default function App() {
 
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6 relative z-10">
               <a
-                href="mailto:dev@core.com"
+                href="mailto:hazamiyazid4@gmail.com"
                 className="btn-primary px-14 py-6 text-lg flex items-center gap-3 w-full sm:w-auto justify-center rounded-2xl"
               >
                 SAY HELLO <Mail className="w-5 h-5" />
               </a>
-              <div className="flex gap-4">
-                {[Github, GitBranch, User].map((Icon, i) => (
-                  <button key={i} className="w-16 h-16 glass-card rounded-2xl flex items-center justify-center hover:text-secondary transition-all">
-                    <Icon className="w-6 h-6" />
-                  </button>
-                ))}
-              </div>
             </div>
           </motion.div>
         </section>
@@ -735,7 +892,7 @@ export default function App() {
       <footer className="py-20 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="font-mono text-sm text-on-surface-variant/60">
-            © 2026 <span className="text-secondary/80">MUHAMMAD YAZID HAZAMI</span> — SOFTWARE ENGINEER
+            © 2026 <span className="text-secondary/80">YAZID'S ARCHIVE</span> — SOFTWARE ENGINEER
           </div>
           <div className="flex gap-12 font-mono text-[10px] tracking-widest text-on-surface-variant/40">
             <a href="#" className="hover:text-secondary">PRIVACY_POLICY</a>
