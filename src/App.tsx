@@ -21,27 +21,27 @@ import {
 
 // Custom SQL Icon Component
 const SqlCustomIcon = ({ className }: { className?: string }) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    xmlns="http://www.w3.org/2000/svg" 
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
     className={className}
   >
     {/* Body Tabung */}
-    <path 
-      d="M4 6V18C4 19.66 7.58 21 12 21C16.42 21 20 19.66 20 18V6" 
+    <path
+      d="M4 6V18C4 19.66 7.58 21 12 21C16.42 21 20 19.66 20 18V6"
       fill="#00758F" // Biru Gelap
     />
     {/* Atas Tabung */}
     <ellipse cx="12" cy="6" rx="8" ry="3" fill="#00A3CC" /> {/* Biru Terang */}
     {/* Tulisan SQL */}
-    <text 
-      x="12" 
-      y="16" 
-      textAnchor="middle" 
-      fill="white" 
-      fontSize="6" 
-      fontWeight="900" 
+    <text
+      x="12"
+      y="16"
+      textAnchor="middle"
+      fill="white"
+      fontSize="6"
+      fontWeight="900"
       fontFamily="Arial, sans-serif"
     >
       SQL
@@ -188,7 +188,7 @@ export default function App() {
     "robust android applications",
     "software engineering",
     "seamless mobile experiences",
-    "modern software engineering",
+    "software engineering",
     "scalable data architectures"
   ];
 
@@ -202,7 +202,16 @@ export default function App() {
   // Fungsi untuk Smooth Scroll
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
+    if (element) {
+      const offset = 80; // Jarak aman agar judul section tidak tertutup Navbar
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
   };
 
   return (
@@ -210,15 +219,15 @@ export default function App() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/5">
         <div className="flex justify-between items-center h-16 px-6 max-w-7xl mx-auto">
-          <div className="font-mono text-2xl font-bold tracking-tighter text-secondary cursor-pointer" onClick={() => scrollTo('home')}>
-            YAZID'S ARCHIVE
+          <div className="font-mono text-2xl font-bold tracking-tighter cursor-pointer" onClick={() => scrollTo('home')}>
+            Y's Archive
           </div>
           <div className="hidden md:flex items-center space-x-8">
             {['home', 'skills', 'projects', 'contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollTo(item)}
-                className={`nav-link capitalize relative transition-colors duration-300 ${activeSection === item ? 'text-secondary font-bold' : 'text-on-surface-variant hover:text-secondary'
+                className={`nav-link capitalize relative cursor-pointer transition-colors duration-300 ${activeSection === item ? 'text-secondary font-bold' : 'text-on-surface-variant hover:text-secondary'
                   }`}
               >
                 {item}
@@ -233,11 +242,6 @@ export default function App() {
               </button>
             ))}
           </div>
-          {/* <div className="flex items-center space-x-4">
-            <button className="btn-primary uppercase tracking-wider text-xs font-bold shadow-lg shadow-secondary/10">
-              Resume
-            </button>
-          </div> */}
         </div>
       </nav>
 
@@ -294,23 +298,23 @@ export default function App() {
               transition={{ delay: 0.8, duration: 0.8 }}
               className="text-on-surface-variant/80 text-lg max-w-lg leading-relaxed border-l-2 border-secondary/20 pl-4"
             >
-              "Hello, I'm a Software Engineering student passionate about building responsive mobile apps and websites.
+              Hello, I'm a Software Engineering student passionate about building responsive mobile apps and websites.
               I believe great digital products are born from a mix of solid logic and modern design.
-              My goal is to create solution-oriented, aesthetic, and impactful experiences for every user."
+              My goal is to create solution-oriented, aesthetic, and impactful experiences for every user.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1 }}
-              className="flex flex-wrap gap-5 pt-6"
+              className="flex flex-wrap gap-5 pt-6 "
             >
               {/* TOMBOL UTAMA: VIEW WORK */}
               <motion.button
                 onClick={() => scrollTo('projects')}
                 whileHover={{ scale: 1.05, translateY: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative px-8 py-4 bg-secondary text-surface font-bold rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_0_20px_rgba(168,85,247,0.2)] hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] flex items-center gap-3"
+                className="group relative px-8 py-4 bg-secondary text-surface font-bold rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_0_20px_rgba(168,85,247,0.2)] hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] flex items-center gap-3 cursor-pointer"
               >
                 {/* Efek kilatan cahaya saat hover */}
                 <div className="absolute inset-0 w-full h-full bg-white/20 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
@@ -324,7 +328,7 @@ export default function App() {
                 onClick={() => scrollTo('contact')}
                 whileHover={{ scale: 1.05, translateY: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white/5 backdrop-blur-md border border-white/10 text-white font-medium rounded-2xl hover:bg-white/10 hover:border-secondary/50 transition-all duration-300 flex items-center gap-3"
+                className="px-8 py-4 bg-white/5 backdrop-blur-md border border-white/10 text-white font-medium rounded-2xl hover:bg-white/10 hover:border-secondary/50 transition-all duration-300 flex items-center gap-3 cursor-pointer"
               >
                 INITIATE PROJECT
               </motion.button>
@@ -375,20 +379,6 @@ export default function App() {
               <span className="text-[10px] font-mono text-on-surface-variant/40 uppercase tracking-[0.2em]">Socials</span>
             </motion.div>
           </div>
-
-          {/* <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2 }}
-            className="hidden lg:block relative"
-          >
-            <div className="absolute -inset-4 bg-secondary/20 blur-3xl rounded-full opacity-20 animate-pulse"></div>
-            <img
-              src="public/photo.jpg"
-              alt="Muhammad Yazid Hazami"
-              className="relative w-full aspect-square object-cover rounded-[2rem] grayscale hover:grayscale-0 transition-all duration-1000 border border-white/10"
-            />
-          </motion.div> */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -425,7 +415,7 @@ export default function App() {
             {/* Bagian Languages dengan Icon */}
             <motion.div className="md:col-span-6 glass-card p-8 rounded-[2rem] space-y-6">
               <h3 className="font-mono text-xs text-secondary tracking-widest uppercase">Languages</h3>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 cursor-default">
                 {SKILLS.languages.map((lang, i) => (
                   <div key={i} className="flex items-center gap-3 group p-2 hover:bg-white/5 rounded-xl transition-colors">
                     <lang.icon className="w-5 h-5 text-on-surface-variant group-hover:text-secondary transition-colors" />
@@ -438,7 +428,7 @@ export default function App() {
             {/* Bagian Database dengan Icon */}
             <motion.div className="md:col-span-6 glass-card p-8 rounded-[2rem] space-y-6">
               <h3 className="font-mono text-xs text-secondary tracking-widest uppercase">Databases</h3>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 cursor-default">
                 {SKILLS.databases.map((db, i) => (
                   <div key={i} className="flex items-center gap-3 group p-2 hover:bg-white/5 rounded-xl transition-colors">
                     <db.icon className="w-8 h-8 text-on-surface-variant group-hover:text-secondary transition-colors" />
@@ -451,7 +441,7 @@ export default function App() {
             {/* Bagian Tools dengan Icon (Badge Style) */}
             <motion.div className="md:col-span-12 glass-card p-8 rounded-[2rem]">
               <h3 className="font-mono text-xs text-tertiary tracking-widest uppercase mb-6">Tools & Framework</h3>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 cursor-default">
                 {SKILLS.tools.map((tool, i) => (
                   <div key={i} className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-xl border border-white/10 hover:border-secondary/50 transition-all group">
                     <tool.icon className="w-4 h-4 text-on-surface-variant group-hover:text-secondary transition-colors" />
@@ -470,23 +460,37 @@ export default function App() {
             title="My Projects"
             subtitle="A collection of systems and applications I've engineered."
           />
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {PROJECTS.map((project, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="glass-card group p-8 rounded-[2rem] flex flex-col justify-between border-l-4 border-l-transparent hover:border-l-secondary transition-all duration-300"
+                // --- ANIMASI MASUK (ENTRANCE) ---
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{
+                  duration: 0.8,
+                  delay: i * 0.1,
+                  ease: [0.21, 0.47, 0.32, 0.98] // Custom cubic-bezier untuk gerakan yang lebih "smooth"
+                }}
+
+                // --- ANIMASI HOVER (INTERAKSI) ---
+                whileHover={{
+                  y: -12,
+                  transition: { type: "spring", stiffness: 400, damping: 25 }
+                }}
+                whileTap={{ scale: 0.98 }} // Efek sedikit membal saat diklik
+
+                className="glass-card group p-8 rounded-[2rem] flex flex-col justify-between border-l-4 border-l-transparent hover:border-l-secondary transition-all duration-300 cursor-pointer"
               >
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-2xl font-bold group-hover:text-secondary transition-colors">
+                    {/* Animasi teks judul saat card di-hover */}
+                    <motion.h3
+                      className="text-2xl font-bold group-hover:text-secondary transition-colors"
+                    >
                       {project.title}
-                    </h3>
+                    </motion.h3>
                     <p className="font-mono text-[10px] text-secondary tracking-widest mt-1 uppercase">
                       {project.tech}
                     </p>
@@ -499,23 +503,26 @@ export default function App() {
 
                 <div className="mt-8 pt-6 border-t border-white/5">
                   <div className="flex justify-between items-start">
-                    <a
+                    <motion.a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      whileHover={{ x: 5 }}
                       className="flex items-center gap-2 text-sm font-mono text-secondary group/link w-fit"
                     >
                       VIEW SOURCE CODE
                       <ExternalLink className="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
-                    </a>
-                    <a
+                    </motion.a>
+
+                    <motion.a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      whileHover={{ scale: 1.2, rotate: 5 }}
                       className="p-2 hover:bg-white/5 rounded-full text-on-surface-variant hover:text-secondary transition-all"
                     >
                       <Github className="w-6 h-6" />
-                    </a>
+                    </motion.a>
                   </div>
                 </div>
               </motion.div>
@@ -541,12 +548,18 @@ export default function App() {
             </div>
 
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6 relative z-10">
-              <a
-                href="mailto:hazamiyazid4@gmail.com"
-                className="btn-primary px-14 py-6 text-lg flex items-center gap-3 w-full sm:w-auto justify-center rounded-2xl"
+              <motion.a
+                href="mailto:hazamiyazid01@gmail.com"
+                whileHover={{ scale: 1.05, translateY: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative px-14 py-6 bg-secondary text-surface font-bold rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_0_20px_rgba(168,85,247,0.2)] hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] flex items-center gap-3 w-full sm:w-auto justify-center text-lg"
               >
-                SAY HELLO <Mail className="w-5 h-5" />
-              </a>
+                {/* Efek kilatan cahaya saat hover */}
+                <div className="absolute inset-0 w-full h-full bg-white/20 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
+
+                <span className="relative z-10 uppercase tracking-wider">Say Hello</span>
+                <Mail className="w-6 h-6 relative z-10 group-hover:rotate-12 transition-transform" />
+              </motion.a>
             </div>
           </motion.div>
         </section>
@@ -556,7 +569,7 @@ export default function App() {
       <footer className="py-20 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="font-mono text-sm text-on-surface-variant/60">
-            © 2026 <span className="text-secondary/80">YAZID'S ARCHIVE</span> — SOFTWARE ENGINEER
+            © 2026 <span className="text-secondary/80">Y's ARCHIVE</span> — 11th Grade Student at SMKN 64 Jakarta
           </div>
           <div className="flex gap-12 font-mono text-[10px] tracking-widest text-on-surface-variant/40">
             <a href="#" className="hover:text-secondary">PRIVACY_POLICY</a>
