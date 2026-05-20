@@ -383,7 +383,7 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2 }}
-            className="hidden lg:block relative group"
+            className="relative group w-72 md:w-84 lg:w-full mx-auto lg:mx-0 order-first lg:order-last lg:mb-0"
           >
             {/* 1. EFEK GLOW (Cahaya Ungu di Belakang) */}
             <div className="absolute -inset-4 bg-secondary/30 blur-[100px] rounded-full opacity-40 group-hover:opacity-60 transition-opacity duration-1000 animate-pulse"></div>
@@ -566,14 +566,12 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="py-20 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="font-mono text-sm text-on-surface-variant/60">
-            © 2026 <span className="text-secondary/80">Y's ARCHIVE</span> — 11th Grade Student at SMKN 64 Jakarta
-          </div>
-          <div className="flex gap-12 font-mono text-[10px] tracking-widest text-on-surface-variant/40">
-            <a href="#" className="hover:text-secondary">PRIVACY_POLICY</a>
-            <a href="#" className="hover:text-secondary">SYSTEM_LOGS</a>
+      <footer className="py-20 border-t border-white/5 bg-surface/30">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center gap-6 text-center">
+
+          <div className="font-mono text-sm text-on-surface-variant/60 leading-relaxed">
+            © 2026 <span className="text-secondary/80 font-bold">Y's ARCHIVE</span>
+            <span className="block md:inline md:ml-2">— 11th Grade Student at SMKN 64 Jakarta</span>
           </div>
         </div>
       </footer>
