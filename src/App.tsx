@@ -503,18 +503,7 @@ export default function App() {
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-white/5">
-                  <div className="flex justify-between items-start">
-                    <motion.a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ x: 5 }}
-                      className="flex items-center gap-2 text-sm font-mono text-secondary group/link w-fit"
-                    >
-                      VIEW SOURCE CODE
-                      <ExternalLink className="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
-                    </motion.a>
-
+                  <div className="flex justify-end items-center w-full">
                     <motion.a
                       href={project.githubUrl}
                       target="_blank"
