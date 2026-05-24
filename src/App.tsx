@@ -120,10 +120,16 @@ const PROJECTS = [
     tech: "PHP Native + MySQL",
     githubUrl: "https://github.com/Chizuyu/Website-Kos-Revan",
     desc: "A simple dormitory management application with user authentication and room showcase features."
+  },
+  {
+    title: "Tetris",
+    tech: "TypeScript + NextJs",
+    githubUrl: "https://github.com/Chizuyu/NextJs-Tetris",
+    desc: "A Tetris."
   }
 ];
 
-// --- COMPONENTS ---
+// --- COMPONENTS ---    
 
 const SectionHeader = ({ title, subtitle, tag }: { title: string; subtitle: string; tag?: string }) => (
   <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
