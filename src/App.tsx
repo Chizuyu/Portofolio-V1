@@ -120,10 +120,16 @@ const PROJECTS = [
     tech: "PHP Native + MySQL",
     githubUrl: "https://github.com/Chizuyu/Website-Kos-Revan",
     desc: "A simple dormitory management application with user authentication and room showcase features."
+  },
+  {
+    title: "Tetris",
+    tech: "TypeScript + NextJs",
+    githubUrl: "https://github.com/Chizuyu/NextJs-Tetris",
+    desc: "A Tetris."
   }
 ];
 
-// --- COMPONENTS ---
+// --- COMPONENTS ---    
 
 const SectionHeader = ({ title, subtitle, tag }: { title: string; subtitle: string; tag?: string }) => (
   <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
@@ -389,7 +395,7 @@ export default function App() {
 
             <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 p-2 bg-white/5 backdrop-blur-sm">
               <img
-                src="Photo.jpg"
+                src="Photo.jpg" // Pastikan path benar (biasanya dari folder public cukup "/photo.jpg")
                 alt="Muhammad Yazid Hazami"
                 className="w-full aspect-square object-cover rounded-[2rem]"
               />
