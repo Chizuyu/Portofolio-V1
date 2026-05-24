@@ -249,14 +249,14 @@ export default function App() {
         {/* Hero Section */}
         <section id="home" className="relative grid lg:grid-cols-2 gap-16 items-center min-h-[70vh]">
           <div className="space-y-8 z-10">
-            {/* <motion.div
+            <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               className="inline-flex items-center space-x-2 px-3 py-1 glass-card rounded-full"
             >
               <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-              <span className="font-mono text-[10px] text-secondary uppercase tracking-widest">Available for hire</span>
-            </motion.div> */}
+              <span className="font-mono text-[10px] text-secondary uppercase tracking-widest">Available for Freelance</span>
+            </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, x: -30 }}
@@ -383,24 +383,19 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2 }}
-            className="relative group w-72 md:w-84 lg:w-full mx-auto lg:mx-0 order-first lg:order-last lg:mb-0"
+            className="relative w-72 md:w-84 lg:w-full mx-auto lg:mx-0 order-first lg:order-last lg:mb-0"
           >
-            {/* 1. EFEK GLOW (Cahaya Ungu di Belakang) */}
-            <div className="absolute -inset-4 bg-secondary/30 blur-[100px] rounded-full opacity-40 group-hover:opacity-60 transition-opacity duration-1000 animate-pulse"></div>
+            <div className="absolute -inset-4 bg-secondary/30 blur-[100px] rounded-full opacity-40 animate-pulse"></div>
 
-            {/* 2. CONTAINER FOTO DENGAN BORDER & OVERLAY */}
             <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 p-2 bg-white/5 backdrop-blur-sm">
               <img
-                src="Photo.jpg" // Pastikan path benar (biasanya dari folder public cukup "/photo.jpg")
+                src="Photo.jpg"
                 alt="Muhammad Yazid Hazami"
-                className="w-full aspect-square object-cover rounded-[2rem] grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-1000 ease-out"
+                className="w-full aspect-square object-cover rounded-[2rem]"
               />
-
-              {/* 3. EFEK GRADIENT OVERLAY (Agar bagian bawah foto sedikit gelap & menyatu) */}
               <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-60"></div>
             </div>
 
-            {/* 4. DEKORASI SUDUT (Opsional - Memberikan kesan "Tech/Archive") */}
             <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-secondary/50 rounded-tr-[2rem] -mr-2 -mt-2"></div>
             <div className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-secondary/50 rounded-bl-[2rem] -ml-2 -mb-2"></div>
           </motion.div>
