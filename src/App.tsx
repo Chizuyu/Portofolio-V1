@@ -89,7 +89,7 @@ const PROJECTS = [
     title: "Blogger",
     tech: "Kotlin + REST API",
     githubUrl: "https://github.com/Chizuyu/Blogger",
-    desc: "Offline-first Android application designed for Blogger, utilizing API for data synchronization."
+    desc: "A sophisticated full-stack blogging ecosystem integrating a .NET 10 Web API and a Kotlin Android app. Engineered to modernize legacy LKS requirements with high-end features like content moderation, JWT security, and Jetpack Compose."
   },
   {
     title: "Hospital Management System",
