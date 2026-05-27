@@ -87,9 +87,9 @@ const PROJECTS = [
   },
   {
     title: "Blogger",
-    tech: "Kotlin + REST API",
+    tech: ".NET 10 + KOTLIN + JETPACK COMPOSE",
     githubUrl: "https://github.com/Chizuyu/Blogger",
-    desc: "A sophisticated full-stack blogging ecosystem integrating a .NET 10 Web API and a Kotlin Android app. Engineered to modernize legacy LKS requirements with high-end features like content moderation, JWT security, and Jetpack Compose."
+    desc: "Full-stack blogging solution featuring a .NET 10 Backend and Android Kotlin Frontend. Implements reverse-engineered legacy API compatibility, secure authentication, and advanced content moderation systems."
   },
   {
     title: "Hospital Management System",
