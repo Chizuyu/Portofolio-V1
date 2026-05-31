@@ -92,6 +92,12 @@ const PROJECTS = [
     desc: "Full-stack blogging solution featuring a .NET 10 Backend and Android Kotlin Frontend. Implements reverse-engineered legacy API compatibility, secure authentication, and advanced content moderation systems."
   },
   {
+    title: "BloggerAPI",
+    tech: "ASP.NET 10 + SQLite",
+    githubUrl: "https://github.com/Chizuyu/BloggerAPI",
+    desc: "A RESTful API for a blogging platform, built with .NET 10 and designed for seamless integration with Android Kotlin and Jetpack Compose frontends. Features include user authentication, post management, and advanced content moderation."
+  },
+  {
     title: "Hospital Management System",
     tech: "C# + LINQ + SQL Server",
     githubUrl: "https://github.com/Chizuyu/Hospital",
@@ -395,7 +401,7 @@ export default function App() {
 
             <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 p-2 bg-white/5 backdrop-blur-sm">
               <img
-                src="Photo.jpg" // Pastikan path benar (biasanya dari folder public cukup "/photo.jpg")
+                src="Photo4.jpeg" // Pastikan path benar (biasanya dari folder public cukup "/photo.jpg")
                 alt="Muhammad Yazid Hazami"
                 className="w-full aspect-square object-cover rounded-[2rem]"
               />
