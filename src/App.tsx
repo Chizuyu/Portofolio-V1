@@ -6,10 +6,10 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
-  SiSharp, SiOpenjdk, SiKotlin, SiPhp, SiJavascript, SiHtml5,
+  SiSharp, SiOpenjdk, SiKotlin, SiPhp, SiJavascript, SiDart,
   SiMysql, SiSqlite, SiAndroidstudio,
-  SiGit, SiPostman, SiFigma, SiLaragon,
-  SiBootstrap, SiLaravel, SiNextdotjs, SiNetapp
+  SiGit, SiSwagger, SiFigma, SiLaragon, SiFlutter,
+  SiBootstrap, SiLaravel, SiNextdotjs, SiNetapp, SiTailwindcss,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 import {
@@ -57,11 +57,12 @@ const SKILLS = {
     { name: 'Kotlin', icon: SiKotlin },
     { name: 'PHP', icon: SiPhp },
     { name: 'JS', icon: SiJavascript },
-    { name: 'Bootstrap', icon: SiBootstrap }, // Ganti HTML/CSS ke Tailwind agar keren
+    { name: 'Dart', icon: SiDart },
   ],
   databases: [
     { name: 'MySQL', icon: SiMysql },
-    { name: 'SQL', icon: SqlCustomIcon }
+    { name: 'SQL', icon: SqlCustomIcon },
+    { name: 'SQLite', icon: SiSqlite }
 
   ],
   tools: [
@@ -69,12 +70,15 @@ const SKILLS = {
     { name: 'VS Community', icon: VscVscode },
     { name: 'Android Studio', icon: SiAndroidstudio },
     { name: 'Git', icon: SiGit },
-    { name: 'Postman', icon: SiPostman },
+    { name: 'Swagger', icon: SiSwagger },
     { name: 'Laragon', icon: SiLaragon },
     { name: 'Figma', icon: SiFigma },
     { name: 'Laravel', icon: SiLaravel },
+    { name: 'Bootstrap', icon: SiBootstrap }, 
+    { name: 'Tailwind', icon: SiTailwindcss },
     { name: 'Next.js', icon: SiNextdotjs },
-    { name: '.NET', icon: SiNetapp }
+    { name: '.NET', icon: SiNetapp },
+    { name: 'Flutter', icon: SiFlutter },
   ]
 };
 
@@ -83,7 +87,7 @@ const PROJECTS = [
     title: "Marketplace",
     tech: "Laravel + MySQL",
     githubUrl: "https://github.com/Chizuyu/Marketplace",
-    desc: "A full-stack e-commerce solution with admin dashboard, CRUD product management, and real-time sales reporting."
+    desc: "A full-stack e-commerce solution with admin dashboard, CRUD product management, admin-side order management, real-time sales reporting, client-side shopping cart. Built with Laravel and MySQL for robust performance and scalability."
   },
   {
     title: "Blogger",
@@ -122,10 +126,10 @@ const PROJECTS = [
     desc: "A performance evaluation application for Students. It features a comprehensive dashboard for tracking academic progress."
   },
   {
-    title: "Kos Revan",
-    tech: "PHP Native + MySQL",
-    githubUrl: "https://github.com/Chizuyu/Website-Kos-Revan",
-    desc: "A simple dormitory management application with user authentication and room showcase features."
+    title: "Product Management System",
+    tech: "Laravel + MySQL",
+    githubUrl: "https://github.com/Chizuyu/Product-Management-System",
+    desc: "A Web Application for product management system with CRUD operations, user authentication, responsive design, dark mode, live search, and pagination."
   },
   {
     title: "Tetris",
