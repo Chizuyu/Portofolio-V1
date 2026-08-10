@@ -10,6 +10,7 @@ import {
   SiMysql, SiSqlite, SiAndroidstudio,
   SiGit, SiSwagger, SiFigma, SiLaragon, SiFlutter,
   SiBootstrap, SiLaravel, SiNextdotjs, SiNetapp, SiTailwindcss,
+  SiPostman
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 import {
@@ -79,6 +80,7 @@ const SKILLS = {
     { name: 'Next.js', icon: SiNextdotjs },
     { name: '.NET', icon: SiNetapp },
     { name: 'Flutter', icon: SiFlutter },
+    { name: 'Postman', icon: SiPostman },
   ]
 };
 
@@ -120,28 +122,16 @@ const PROJECTS = [
     desc: "A modern e-commerce platform for local products with a focus on user experience and exporting reports."
   },
   {
-    title: "Esemka Score",
-    tech: "C# + SQL Server",
-    githubUrl: "https://github.com/Chizuyu/SMKScore",
-    desc: "A performance evaluation application for Students. It features a comprehensive dashboard for tracking academic progress."
-  },
-  {
-    title: "Product Management System",
-    tech: "Laravel + MySQL",
-    githubUrl: "https://github.com/Chizuyu/Product-Management-System",
-    desc: "A Web Application for product management system with CRUD operations, user authentication, responsive design, dark mode, live search, and pagination."
-  },
-  {
-    title: "Tetris",
-    tech: "TypeScript + Next.js",
-    githubUrl: "https://github.com/Chizuyu/NextJs-Tetris",
-    desc: "A Tetris."
-  },
-  {
     title: "Youth Creatifers Studio",
     tech: "React + Next.js",
     githubUrl: "https://github.com/Chizuyu/Youth-Creatifers-Studio",
-    desc: "A creative studio for young talents to showcase their work and collaborate on projects."
+    desc: "A company profile website built with React and Next.js, featuring a responsive design and interactive elements."
+  },
+  {
+    title: "Moco - Portal Berita",
+    tech: "Laravel + MySQL + Filament V3 (CMS)",
+    githubUrl: "https://github.com/Chizuyu/Moco",
+    desc: "A news portal application with real-time updates, user authentication, and a responsive design."
   }
 ];
 
@@ -411,7 +401,7 @@ export default function App() {
 
             <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 p-2 bg-white/5 backdrop-blur-sm">
               <img
-                src="Photo4.jpeg" // Pastikan path benar (biasanya dari folder public cukup "/photo.jpg")
+                src="Photo.jpg"
                 alt="Muhammad Yazid Hazami"
                 className="w-full aspect-square object-cover rounded-[2rem]"
               />
